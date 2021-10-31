@@ -1,0 +1,251 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>Vue3开发实践及技巧</title>
+
+		<link rel="stylesheet" href="dist/reset.css">
+		<link rel="stylesheet" href="dist/reveal.css">
+		<link rel="stylesheet" href="dist/theme/black.css" id="theme">
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="plugin/highlight/monokai.css" id="highlight-theme">
+
+		<style>
+			.col-wrapper {
+				display: flex;
+			}
+			.col-block *{
+				display: block;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<h3 style="margin-top: 100px;">Vue3开发实践及技巧</h3>
+					<p style="margin-top: 100px;">
+						<small>Created by <a href="https://gitee.com/iamllitog" target="_blank">李桐</a></small>
+					</p>
+					<img style="width: 140px;position: relative; top: -50px;" src="assets/ts.png" alt="">
+				</section>
+				<section>
+					<section>
+						<h2>开发工具-Volar</h2>
+					</section>
+					<section>
+						<ul>
+							<li>
+								与vetur相同，volar是一个针对vue的vscode插件，不过与vetur不同的是，volar提供了更为强大的功能。
+							</li>
+							<li class="fragment">安装的方式很简单，直接在vscode的插件市场搜索volar，然后点击安装就可以了。</li>
+						</ul>
+						<img class="fragment" src="assets/volar.image" alt="">
+					</section>
+					<section>
+						<h2>Volar功能:css功能增强1</h2>
+						<p class="fragment">提供class声明的引用提示</p>
+						<img class="fragment" src="assets/volar-css1.png">
+					</section>
+					<section>
+						<h2>Volar功能:css功能增强2</h2>
+						<p class="fragment">class追溯</p>
+						<img class="fragment" src="assets/volar-css2.image">
+					</section>
+					<section>
+						<h2>Volar功能:css功能增强3</h2>
+						<p class="fragment">css module类型提示</p>
+						<img class="fragment" src="assets/volar-css3.png">
+					</section>
+					<section>
+						<h2>Volar功能:TS静态检测功能（重点）</h2>
+						<p style="font-size: 25px;" class="fragment">提供了只有在JSX中才能实现的TS静态代码检测功能（前提是使用ts语言开发项目），不仅对自定义组件prop，event添加了支持，还对v-model的检测加以实现，规避了vue template常年被jsx诟病的静态检测问题</p>
+						<img class="fragment" src="assets/volar-ts1.png">
+					</section>
+					<section>
+						<h2>Vue-tsc（重点）</h2>
+						<p style="font-size: 20px;" class="fragment">Volar不仅在vscode可以使用TS静态检测功能，还可以在命令行中实现对template检测</p>
+						<img style="margin: 0;" class="fragment" src="assets/volar-ts2.png">
+						<img class="fragment" src="assets/volar-ts3.png">
+					</section>
+				</section>
+				<section>
+					<section>
+						<h2>Composition Api/Option Api/Class Component</h2>
+					</section>
+					<section>
+						<h2>计算属性</h2>
+						<div class="col-wrapper">
+							<div class="fragment col-block">
+								<span>Option Api</span>
+								<img src="assets/compare-computed-oa.png" alt="">
+							</div>
+							<div class="fragment col-block">
+								<span>Composition Api</span>
+								<img src="assets/compare-computed-ca.png" alt="">
+							</div>
+							<div class="fragment col-block">
+								<span>Class Component</span>
+								<img src="assets/compare-computed-class.png" alt="">
+							</div>
+						</div>
+					</section>
+					<section>
+						<h2>事件</h2>
+						<div class="col-wrapper">
+							<div class="fragment col-block">
+								<span>Option Api</span>
+								<img src="assets/compare-emit-oa.png" alt="">
+							</div>
+							<div class="fragment col-block">
+								<span>Composition Api</span>
+								<img src="assets/compare-emit-ca.png" alt="">
+							</div>
+							<div class="fragment col-block">
+								<span>Class Component</span>
+								<img src="assets/compare-emit-class.png" alt="">
+							</div>
+						</div>
+					</section>
+					<section>
+						<h2>监听变化</h2>
+						<div class="col-wrapper">
+							<div class="fragment col-block">
+								<span>Option Api</span>
+								<img src="assets/compare-watch-oa.png" alt="">
+							</div>
+							<div class="fragment col-block">
+								<span>Composition Api</span>
+								<img src="assets/compare-watch-ca.png" alt="">
+							</div>
+							<div class="fragment col-block">
+								<span>Class Component</span>
+								<img src="assets/compare-watch-class.png" alt="">
+							</div>
+						</div>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h2>Composition Api</h2>
+					</section>
+					<section>
+						<h2>Composition Api的意义</h2>
+						<ul>
+							<li class="fragment">Composition API是vue3对标React Hooks而产生的新组件编程序方式。</li>
+							<li class="fragment">它可以提高代码逻辑的可复用性，从而实现与模板的无关性；同时函数式的编程使代码的可压缩性更强。</li>
+						</ul>
+					</section>
+					<section>
+						<h2>Composition Api的优缺点</h2>
+						<ul>
+							<li class="fragment">优点：封装方便，抽象方便，复用性高</li>
+							<li class="fragment">缺点：setup内依赖顺序有时无法变动，易形成面条代码；封装性差</li>
+							<li style="font-size: 25px;" class="fragment">setup内的每个变量声明不可能像Option Api那样通过this.xxx调用，只能先声明再使用。</li>
+						</ul>
+					</section>
+					<section>
+						<h2>对比React Hooks</h2>
+						<ul>
+							<li class="fragment">1.减轻了React Hooks重新执行的优化负担</li>
+							<li style="font-size: 25px;" class="fragment">React Hooks在每次渲染时都会重新执行，因此需要配合useCallback，useMemo等hook进行优化；而Composition Api只在首次运行（相当于created钩子），从而减少了优化的负担。</li>
+							<li class="fragment">2.Composition Api需要导出声明的变量给template和调用组建者使用</li>
+							<li style="font-size: 25px;" class="fragment">vue3由于使用template和js分离形式开发，故需要将template中使用的变量通过setup函数的return函数返回（也可以通过&lt;script setup&gt;跳过setup函数）</li>
+							<li style="font-size: 25px;" class="fragment">可以通过const xxxComp = ref&lt;InstanceType&lt;typeof XxxComponent&gt;&gt;();的方式获取子组件引用，并且该方式可以提供子组件的Typscript类型暴露的方法和变量，使外部可以调用</li>
+						</ul>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h2>Composition Api实战</h2>
+					</section>
+					<section>
+						<h2>1.useRequest</h2>
+						<ul>
+							<li>简化网络请求</li>
+							<li>为请求自动添加Loading标识</li>
+							<li>无参请求</li>
+							<li>监听请求</li>
+							<li>初始化数据</li>
+						</ul>
+					</section>
+					<section>
+						<h2>2.toPropRef/toModelRef</h2>
+						<ul>
+							<li>防止数据乱流</li>
+							<li>简化v-model绑定</li>
+							<li>自动sync</li>
+						</ul>
+					</section>
+					<section>
+						<h2>3.cacheRef</h2>
+						<ul>
+							<li>为Ref提供缓存功能</li>
+							<li>与自定义状态管理结合更加灵活</li>
+						</ul>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h2>抛弃vuex的简易状态机实现</h2>
+					</section>
+					<section>
+						<h2>1.有限状态机（FSM）</h2>
+						<ul>
+							<li style="font-size: 25px;" class="fragment">state:事物的状态，在前端应用里更泛化为存储变量</li>
+							<li style="font-size: 25px;" class="fragment">action:改变state的行为</li>
+						</ul>
+						<img class="fragment" src="assets/fsm-tcp.png" alt="">
+					</section>
+					<section>
+						<h2>2.当下前端项目的特殊需求</h2>
+						<ul>
+							<li style="font-size: 25px;" class="fragment">响应式</li>
+							<li style="font-size: 25px;" class="fragment">state只读</li>
+						</ul>
+					</section>
+					<section>
+						<h2>3.state/action</h2>
+					</section>
+					<section>
+						<h2>4.state getter</h2>
+					</section>
+					<section>
+						<h2>5.持久化</h2>
+					</section>
+					<section>
+						<h2>6.优缺点对比</h2>
+						<ul>
+							<li class="fragment">优点:简易，项目支持好</li>
+							<li class="fragment">缺点:没办法记录action，可以通过自定义hook实现</li>
+						</ul>
+					</section>
+				</section>
+				<section>
+					<h1>感谢观看</h1>
+					<p><a href="https://github.com/litong-n99/vue3-demo" target="_blank">项目代码</a>&<a href="https://litong-n99.github.io/ch-vue3-ppt/index.html#/" target="_blank">PPT</a></p>
+				</section>
+			</div>
+		</div>
+
+		<script src="dist/reveal.js"></script>
+		<script src="plugin/notes/notes.js"></script>
+		<script src="plugin/markdown/markdown.js"></script>
+		<script src="plugin/highlight/highlight.js"></script>
+		<script>
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+				hash: true,
+				transition: 'convex',
+
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+			});
+		</script>
+	</body>
+</html>
